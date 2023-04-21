@@ -47,19 +47,6 @@ router.put("/:id", requireToken, async (req, res, next) => {
     }
 });
 // putandpatch?
-router.patch("/:id", requireToken, async (req, res, next) => {
-
-    try {
-        const taskToUpdate = await Task.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            {new:true}
-        );
-        res.status(200).json(taskToUpdate);
-    } catch (err) {
-        next(err);
-    }
-});
 
 //Delete a task, specify which one by ID
 router.delete("/:id", requireToken, async (req, res, next) => {

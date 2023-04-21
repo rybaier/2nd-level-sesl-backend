@@ -17,9 +17,9 @@ router.get('/createaccount', (req, res, next) =>{
 router.post('/createaccount', async (req, res, next) => {
     
     try {
-        const { email } = req.body
+        const { name } = req.body
         const password = await bcrypt.hash(req.body.password, 12)
-        const user = await User.create({ email, password })
+        const user = await User.create({ name, password })
         res.status(201).json(user)
     } catch (err) {
         return next(err)
@@ -28,7 +28,7 @@ router.post('/createaccount', async (req, res, next) => {
 
 //LOG IN 
 router.post('/login', (req, res, next) => {
-    User.findOne( {email: req.body.email})
+    User.findOne( {name: req.body.name})
     .then((user) => {
         console.log(user)
         console.log(req)
